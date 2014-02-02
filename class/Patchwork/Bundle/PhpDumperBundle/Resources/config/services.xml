@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="patchwork.dumper" alias="patchwork.dumper.cli">
+            <property name="maxLength" />
+            <property name="maxDepth" />
+            <property name="maxString" />
+            <property name="checkInternalRefs" />
+        </service>
+
+        <service id="patchwork.dumper.cli" class="Patchwork\PHP\CliDumper">
+            <property name="maxStringWidth" />
+            <property name="colors" />
+        </service>
+    </services>
+
+</container>
