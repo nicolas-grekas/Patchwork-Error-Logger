@@ -33,16 +33,22 @@ isset($_SERVER['REQUEST_TIME_FLOAT']) or $_SERVER['REQUEST_TIME_FLOAT'] = microt
  */
 function patchwork_require()
 {
+    Patchwork\PHP\InDepthErrorHandler::stackErrors();
+
     try
     {
-        Patchwork\PHP\InDepthErrorHandler::stackErrors();
-        return Patchwork\PHP\InDepthErrorHandler::unstackErrors(require func_get_arg(0));
+        $x = require func_get_arg(0);
     }
     catch (Exception $x)
     {
         Patchwork\PHP\InDepthErrorHandler::unstackErrors();
+
         throw $x;
     }
+
+    Patchwork\PHP\InDepthErrorHandler::unstackErrors();
+
+    return $x;
 }
 
 /**
